@@ -48,7 +48,7 @@ sql_create_table_station_table ="""
 CREATE TABLE IF NOT EXISTS station_table (
 'SID' INTEGER PRIMARY KEY,
 'Bezeichnung' TEXT
-)
+);
 """
 
 # Befehl für A4, hier wird max aus mean_temp gesucht, mit unserer Station (35 nach Update) außerdem wird NA als Wert ausgeschlossen
