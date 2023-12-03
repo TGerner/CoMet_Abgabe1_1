@@ -1,0 +1,45 @@
+date;station;count;wind_speed;precipitation;snowfall;snow_depth;mean_temperature;max_temperature;min_temperature
+
+    date DATE,
+    station TEXT,
+    count INTEGER,
+    wind_speed FLOAT,
+    precipitation DECIMAL(9,2),
+    snowfall FLOAT,
+    snow_depth FLOAT,
+    mean_temperature INTEGER,
+    max_temperature INTEGER,
+    min_temperature INTEGER
+
+
+    ### nächste Aufgabe: 
+
+
+
+        CASE 
+        WHEN station = '10th & E St NW' THEN 1
+        WHEN station = '10th & K St NW' THEN 2
+        WHEN station = '10th St & Constitution Ave NW' THEN 3
+        WHEN station = '11th & Girard St NW' THEN 4
+        WHEN station = '11th & Kenyon St NW' THEN 5
+    ELSE station
+END;
+
+
+UPDATE main_table
+SET station = 
+    CASE 
+        WHEN station = '10th & E St NW' THEN 1
+        WHEN station = '10th & K St NW' THEN 2
+        WHEN station = '10th St & Constitution Ave NW' THEN 3
+        WHEN station = '11th & Girard St NW' THEN 4
+        WHEN station = '11th & Kenyon St NW' THEN 5
+    ELSE station
+END;
+
+with open("StationTabelle.csv") as csv_file:
+    next(csv_file)
+    csv_reader_object = csv.reader(csv_file, delimiter=';')
+    with sqlite3.connect(DATABASE) as conn: 
+        cursor = conn.cursor()
+        cursor.executemany(sql_insert_station_table, csv_reader_object)
